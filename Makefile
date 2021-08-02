@@ -6,7 +6,7 @@
 #    By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/01 19:12:24 by kshanti           #+#    #+#              #
-#    Updated: 2021/07/27 02:36:04 by kshanti          ###   ########.fr        #
+#    Updated: 2021/08/02 11:20:44 by kshanti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,10 @@ NAME = pipex
 
 HEAD = ./includes/pipex.h
 SRCS = ./srcs/
+UTILS = ./srcs/utils/
 
-C_FILE =	$(SRCS)base_utils.c $(SRCS)utils.c $(SRCS)commands.c $(SRCS)init.c \
-			$(SRCS)main.c
+C_FILE =	$(UTILS)base_utils.c $(UTILS)utils.c $(SRCS)commands.c $(SRCS)init.c \
+			$(SRCS)main.c $(UTILS)ft_split.c
 
 O_FILE = $(C_FILE:.c=.o)
 
