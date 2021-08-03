@@ -59,7 +59,7 @@ char    *ft_strjoin(char *s1, char *s2)
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	str = (char *)calloc(1, ft_strlen(s1) + ft_strlen(s2) + 1);
     str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
 	if (str)
 	{

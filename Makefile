@@ -17,7 +17,7 @@ SRCS = ./srcs/
 UTILS = ./srcs/utils/
 
 C_FILE =	$(UTILS)base_utils.c $(UTILS)utils.c $(SRCS)commands.c $(SRCS)init.c \
-			$(SRCS)main.c $(UTILS)ft_split.c
+			$(SRCS)main.c $(UTILS)ft_split.c $(SRCS)find_exec.c
 
 O_FILE = $(C_FILE:.c=.o)
 

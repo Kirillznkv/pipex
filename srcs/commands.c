@@ -25,23 +25,34 @@ void	output(char **a)
 
 int start_commands(t_commands *commands, char **env)
 {
-	// pid_t	pd1, pd2;
+	pid_t	pd1;
+	pid_t	pd2;
+	char	*ex1;
+	char	*ex2;
+
     close(1);
     close(0);
     dup2(commands->fd_in, 0);
     dup2(commands->fd_out, 1);
-	find_exec("123", env);
-	// pd1 = fork();
-	// if (!pd1)
-	// {
-    // 	execve((commands->cmd1)[0], commands->cmd1, env);
-	// 	exit(1);
-	// }
-	// pd2 = fork();
-	// if (!pd2)
-	// {
-    // 	execve((commands->cmd2)[0], commands->cmd2, env);
-	// 	exit(1);
-	// }
+	ex1 = find_exec((commands->cmd1)[0], env);
+	ex2 = find_exec((commands->cmd2)[0], env);
+	if (ex1 == NULL || ex2 == NULL)
+		return (error("Error: exec not found\n") && struct_free(NULL, ex1, ex2));
+	free ((commands->cmd1)[0]);
+	free ((commands->cmd2)[0]);
+	(commands->cmd1)[0] = ex1;
+	(commands->cmd2)[0] = ex2;
+	pd1 = fork();
+	if (!pd1)
+	{
+    	execve((commands->cmd1)[0], commands->cmd1, env);
+		exit(1);
+	}
+	pd2 = fork();
+	if (!pd2)
+	{
+    	execve((commands->cmd2)[0], commands->cmd2, env);
+		exit(1);
+	}
     return (0);
 }

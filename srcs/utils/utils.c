@@ -27,17 +27,30 @@ int struct_free(t_commands *commands, char *s1, char *s2)
 		free(s1);
 	if (s2)
 		free(s2);
-	a = commands->cmd1;
-	i = -1;
-	while (a[++i])
-		free(a[i]);
-	if (commands->cmd1)
-		free(commands->cmd1);
-	a = commands->cmd2;
-	i = -1;
-	while (a[++i])
-		free(a[i]);
-	if (commands->cmd2)
-		free(commands->cmd2);
+	if (commands)
+	{
+		a = commands->cmd1;
+		i = -1;
+		while (a[++i])
+			free(a[i]);
+		if (commands->cmd1)
+			free(commands->cmd1);
+		a = commands->cmd2;
+		i = -1;
+		while (a[++i])
+			free(a[i]);
+		if (commands->cmd2)
+			free(commands->cmd2);
+	}
 	return (1);
+}
+
+void	free_mas(char **argv)
+{
+	int	i;
+
+	i = -1;
+	while (argv[++i])
+		free(argv[i]);
+	free(argv);
 }

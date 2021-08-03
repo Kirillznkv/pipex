@@ -28,6 +28,7 @@ typedef struct  s_commands
 /*------------------------Utils-----------------------------------------------*/
 int			error(char *str);
 int			struct_free(t_commands *commands, char *s1, char *s2);
+void	    free_mas(char **argv);
 /*------------------------Base_Utils------------------------------------------*/
 int			ft_strlen(char *str);
 char		*ft_strdup(char *s);
@@ -41,7 +42,9 @@ char		**get_command(char **argv, int *i);
 int			set_commands(t_commands *commands, char **argv);
 /*------------------------Commands--------------------------------------------*/
 int			start_commands(t_commands *commands, char **env);
-/*------------------------Split--------------------------------------------*/
+/*------------------------Split-----------------------------------------------*/
 char		**ft_split(char const *s, char c);
+/*------------------------Find_exec-------------------------------------------*/
+char	    *find_exec(char *str, char **env);
 
 #endif
