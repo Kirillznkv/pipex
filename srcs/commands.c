@@ -18,7 +18,7 @@ void	output(char **a)
 	int	i;
 
 	i = -1;
-	while (a[++i])
+	while (a && a[++i])
 		printf("%d: %s\n", i, a[i]);
 }
 //
@@ -29,11 +29,12 @@ int start_commands(t_commands *commands, char **env)
 	pid_t	pd2;
 	char	*ex1;
 	char	*ex2;
+	int		fd[2];
 
-    close(1);
+    // close(1);
     close(0);
     dup2(commands->fd_in, 0);
-    dup2(commands->fd_out, 1);
+    // dup2(commands->fd_out, 1);
 	ex1 = find_exec((commands->cmd1)[0], env);
 	ex2 = find_exec((commands->cmd2)[0], env);
 	if (ex1 == NULL || ex2 == NULL)
@@ -42,12 +43,19 @@ int start_commands(t_commands *commands, char **env)
 	free ((commands->cmd2)[0]);
 	(commands->cmd1)[0] = ex1;
 	(commands->cmd2)[0] = ex2;
+	pipe(fd);
+	close(1);
+	dup2(fd[1], 1);
 	pd1 = fork();
 	if (!pd1)
 	{
     	execve((commands->cmd1)[0], commands->cmd1, env);
 		exit(1);
 	}
+	close(0);
+	close(1);
+    dup2(fd[0], 0);
+    dup2(commands->fd_out, 1);
 	pd2 = fork();
 	if (!pd2)
 	{

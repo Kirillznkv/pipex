@@ -19,6 +19,7 @@ int     col_argc(char **argv)
     if (*argv == NULL)
         return (0);
     res = 1;
+    printf("|%s|-|%c|\n", argv[res], argv[res][0]);
     while (argv[res] && argv[res][0] == '-')
         res++;
     return (res);
@@ -54,8 +55,10 @@ int    set_commands(t_commands *commands, char **argv)
 
     i = 0;
     infile = ft_strdup(argv[i++]);
-    commands->cmd1 = get_command(argv, &i);
-    commands->cmd2 = get_command(argv, &i);
+    commands->cmd1 = get_command(&(argv[i]), &i);
+    output(commands->cmd1);
+    commands->cmd2 = get_command(&(argv[i]), &i);
+    output(commands->cmd2);
     if (!(commands->cmd2))
         return (struct_free(commands, infile, NULL) && error("Error: argument\n"));
     if (argv[i])

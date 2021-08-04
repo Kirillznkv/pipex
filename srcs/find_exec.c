@@ -40,7 +40,7 @@ static int		is_finish_path(char *command, char **res)
 		|| !ft_strncmp("/", command, 1))
 	{
 		if (!(access(command, X_OK)))
-			*res = ft_strdup(command);//
+			*res = ft_strdup(command);
 		return (1);
 	}
 	return (0);
@@ -63,7 +63,7 @@ static char	*check_matrix_path(char *path, char *name)
 	return (res);
 }
 
-char	*find_exec(char *str, char **env)//malloc memery
+char	*find_exec(char *str, char **env)
 {
 	int		i;
 	char	*res;

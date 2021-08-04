@@ -41,6 +41,7 @@ int			col_argc(char **argv);
 char		**get_command(char **argv, int *i);
 int			set_commands(t_commands *commands, char **argv);
 /*------------------------Commands--------------------------------------------*/
+void	    output(char **a);//
 int			start_commands(t_commands *commands, char **env);
 /*------------------------Split-----------------------------------------------*/
 char		**ft_split(char const *s, char c);
