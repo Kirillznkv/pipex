@@ -12,60 +12,67 @@
 
 #include "../includes/pipex.h"
 
-int     col_argc(char **argv)
+static  int get_number_arg(char *arg)
 {
     int res;
+    int i;
 
-    if (*argv == NULL)
-        return (0);
-    res = 1;
-    printf("|%s|-|%c|\n", argv[res], argv[res][0]);
-    while (argv[res] && argv[res][0] == '-')
-        res++;
-    return (res);
-}
-
-char    **get_command(char **argv, int *i)
-{
-    int     inx;
-    int     argc;
-    char    **res;
-
-    argc = col_argc(argv);
-    if (!argc)
-        return (NULL);
-    res = (char **)malloc(sizeof(char *) * (argc + 1));
-    if (!res)
-        return (NULL);
-    res[argc] = NULL;
-    inx = -1;
-    while (++inx < argc)
+    i = 0;
+    res = 0;
+    while (arg[i])
     {
-        res[inx] = ft_strdup(argv[*i]);
-        (*i)++;
+        skip_spases(arg, &i);
+        if (arg[i])
+            res++;
+        while (arg[i] && arg[i] != ' ')
+            i++;
     }
     return (res);
 }
 
-int    set_commands(t_commands *commands, char **argv)
+static  int get_number_simbols(char *arg)
 {
+    int i;
+
+    i = 0;
+    while (arg[i] && arg[i] != ' ')
+        i++;
+    return (i);
+}
+
+char    **get_command(char *arg)
+{
+    char    **res;
+    int     inx;
     int     i;
+    int     n;
+
+    n = get_number_arg(arg);
+    res = (char **)malloc((n + 1) * sizeof(char *));
+    if (!res)
+        return (NULL);
+    res[n] = NULL;
+    i = -1;
+    inx = 0;
+    while (++i < n)
+    {
+        skip_spases(arg, &inx);
+        res[i] = ft_substr(arg, inx, get_number_simbols(&(arg[inx])));
+        inx += get_number_simbols(&(arg[inx]));
+    }
+    return (res);
+}
+
+int set_commands(t_commands *commands, char **argv)
+{
     char    *infile;
     char    *outfile;
 
-    i = 0;
-    infile = ft_strdup(argv[i++]);
-    commands->cmd1 = get_command(&(argv[i]), &i);
-    output(commands->cmd1);
-    commands->cmd2 = get_command(&(argv[i]), &i);
-    output(commands->cmd2);
-    if (!(commands->cmd2))
-        return (struct_free(commands, infile, NULL) && error("Error: argument\n"));
-    if (argv[i])
-        outfile = ft_strdup(argv[i++]);
-    else
-        return (struct_free(commands, infile, NULL) && error("Error: argument\n"));
-    if (argv[i])
+    infile = ft_strdup(argv[0]);
+    commands->cmd1 = get_command(argv[1]);
+    commands->cmd2 = get_command(argv[2]);
+    outfile = ft_strdup(argv[3]);
+    if (!(commands->cmd2) || !(commands->cmd1) || !infile || !outfile)
         return (struct_free(commands, infile, outfile) && error("Error: argument\n"));
     commands->fd_in = open(infile, O_RDONLY, 0644);
     if (commands->fd_in == -1)

@@ -18,7 +18,7 @@ int error(char *str)
     return (1);
 }
 
-int struct_free(t_commands *commands, char *s1, char *s2)
+int struct_free(t_commands *commands, char *s1, char *s2)//////mb delete it
 {
 	int		i;
 	char	**a;
@@ -43,6 +43,12 @@ int struct_free(t_commands *commands, char *s1, char *s2)
 			free(commands->cmd2);
 	}
 	return (1);
+}
+
+void	skip_spases(char *str, int *i)
+{
+	while (str && str[*i] == ' ')
+		(*i)++;
 }
 
 void	free_mas(char **argv)

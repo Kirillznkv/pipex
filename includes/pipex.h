@@ -28,6 +28,7 @@ typedef struct  s_commands
 /*------------------------Utils-----------------------------------------------*/
 int			error(char *str);
 int			struct_free(t_commands *commands, char *s1, char *s2);
+void	    skip_spases(char *str, int *i);
 void	    free_mas(char **argv);
 /*------------------------Base_Utils------------------------------------------*/
 int			ft_strlen(char *str);
@@ -36,9 +37,10 @@ int			ft_strlcat(char *dst, char *src, int size);
 char		*ft_strjoin(char *s1, char *s2);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 int			ft_strncmp(const char *str1, const char *str2, size_t num);
+char	    *ft_substr(char *s, unsigned int start, size_t len);
 /*------------------------Init------------------------------------------------*/
 int			col_argc(char **argv);
-char		**get_command(char **argv, int *i);
+char        **get_command(char *arg);
 int			set_commands(t_commands *commands, char **argv);
 /*------------------------Commands--------------------------------------------*/
 void	    output(char **a);//

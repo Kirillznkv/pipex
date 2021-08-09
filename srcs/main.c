@@ -16,7 +16,7 @@ int main(int argc, char **argv, char **env)
 {
     t_commands   commands;
 
-    if (argc < 5)
+    if (argc != 5)
         return (error("Error: argument\n"));
     if (set_commands(&commands, &(argv[1])))
         return (1);

@@ -108,3 +108,20 @@ int	ft_strncmp(const char *str1, const char *str2, size_t num)
 	}
 	return (p1[i] - p2[i]);
 }
+
+char	*ft_substr(char *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	char	*str;
+
+	i = 0;
+	if (s == NULL)
+		return (NULL);
+	if (ft_strlen(&s[start]) < (int)len)
+		len = ft_strlen(&s[start]);
+	str = (char *)calloc(len + 1, 1);
+	if (str && (int)start <= ft_strlen(s))
+		while (s[start] && i < len)
+			str[i++] = s[start++];
+	return (str);
+}
