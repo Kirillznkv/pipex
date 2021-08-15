@@ -48,6 +48,6 @@ int			start_commands(t_commands *commands, char **env);
 /*------------------------Split-----------------------------------------------*/
 char		**ft_split(char const *s, char c);
 /*------------------------Find_exec-------------------------------------------*/
-char	    *find_exec(char *str, char **env);
+char	    *find_exec(char **str, char **env);
 
 #endif

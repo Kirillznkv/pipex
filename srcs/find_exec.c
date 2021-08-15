@@ -63,7 +63,7 @@ static char	*check_matrix_path(char *path, char *name)
 	return (res);
 }
 
-char	*find_exec(char *str, char **env)
+char	*find_exec(char **str, char **env)
 {
 	int		i;
 	char	*res;
@@ -72,18 +72,24 @@ char	*find_exec(char *str, char **env)
 	char	**save_to_free;
 
 	res = NULL;
-	if (is_finish_path(str, &res))
+	if (is_finish_path(*str, &res))
+	{
+		free(*str);
+		*str = res;
 		return (res);
+	}
 	path = get_path(env);
 	path_matrix = ft_split(path, ':');
 	save_to_free = path_matrix;
 	i = -1;
 	while (path_matrix[++i])
 	{
-		res = check_matrix_path(path_matrix[i], str);
+		res = check_matrix_path(path_matrix[i], *str);
 		if (res)
 		{
 			free_mas(save_to_free);
+			free(*str);
+			*str = res;
 			return (res);
 		}
 	}
