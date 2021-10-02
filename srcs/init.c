@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:08:34 by kshanti           #+#    #+#             */
-/*   Updated: 2021/07/31 19:07:47 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/03 00:54:14 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,27 @@ char    **get_command(char *arg)
     return (res);
 }
 
-int set_commands(t_commands *commands, char **argv)
+int set_commands(t_commands *commands, char **argv, int argc)
 {
+	int		i;
     char    *infile;
     char    *outfile;
 
     infile = ft_strdup(argv[0]);
-    commands->cmd1 = get_command(argv[1]);
-    commands->cmd2 = get_command(argv[2]);
-    outfile = ft_strdup(argv[3]);
-    if (!(commands->cmd2) || !(commands->cmd1) || !infile || !outfile)
-        return (struct_free(commands, infile, outfile) && error("Error: argument\n"));
-    commands->fd_in = open(infile, O_RDONLY, 0644);
-    if (commands->fd_in == -1)
-        return (struct_free(commands, infile, outfile) && error("Error: infile\n"));
-    commands->fd_out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (commands->fd_in == -1)
-        return (struct_free(commands, infile, outfile) && error("Error: outfile\n"));
-    free(infile);
-    free(outfile);
+	i = 0;
+	while (++i < argc - 2)
+		((commands->cmd)[i]).argv = get_command(argv[i]);
+    outfile = ft_strdup(argv[i]);
+	commands->fd_in = open(infile, O_RDONLY, 0644);
+	commands->fd_out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (infile)
+    	free(infile);
+	if (outfile)
+    	free(outfile);
+	while (--i > 0)
+		if (((commands->cmd)[i]).argv == NULL)
+			return (1);
+	if (commands->fd_in == -1 || commands->fd_out == -1)
+		return (1);
     return (0);
 }
