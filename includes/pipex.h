@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 00:48:09 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/03 14:24:07 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/03 14:45:05 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct  s_commands
 /*------------------------Utils-----------------------------------------------*/
 int			error(char *str);
 void	    skip_spases(char *str, int *i);
+int			free_struct(t_commands *commands);
+int			free_masInt(int **arr, int n);
 int		    free_mas(char **argv);
 /*------------------------Base_Utils------------------------------------------*/
 int			ft_strlen(char *str);
