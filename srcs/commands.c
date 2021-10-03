@@ -15,6 +15,8 @@ static int dup_fd(int **fd, int i, int n)
 {
 	if (i && i < n - 1)
 	{
+		close(fd[i - 1][1]);
+		close(fd[i][0]);
 		if (dup2(fd[i - 1][0], 0) == -1)
 			return (1);
 		if (dup2(fd[i][1], 1) == -1)
@@ -22,11 +24,13 @@ static int dup_fd(int **fd, int i, int n)
 	}
 	else if (i == 0)
 	{
+		close(fd[i][0]);
 		if (dup2(fd[i][1], 1) == -1)
 			return (1);
 	}
 	else
 	{
+		close(fd[i - 1][1]);
 		if (dup2(fd[i - 1][0], 0) == -1)
 			return (1);
 	}
@@ -62,6 +66,7 @@ int	start_commands(t_commands *commands, char **env)
 
 	if (fill_fd_pipe(commands))
 		return (error("Error: pipe\n"));
+	// fcntl((commands->fd)[0][0], F_SETFL, O_NONBLOCK);
 	i = -1;
 	while (++i < commands->numders_cmd)
 	{
@@ -69,7 +74,7 @@ int	start_commands(t_commands *commands, char **env)
 		if ((commands->pid)[i] != 0)
 		{
 			close((commands->fd)[i][1]);
-			(commands->fd)[i][1] = -1;
+			// (commands->fd)[i][1] = -1;
 		}
 		else
 		{
