@@ -11,20 +11,20 @@ static int fill_fd_pipe(t_commands *commands)
 	return (0);
 }
 
-static int dup_fd(int **fd, int i, int n)
+int dup_fd(int **fd, int i, int n)//
 {
-	if (i && i < n - 1)
+	if (i == 0)
+	{
+		close(fd[i][0]);
+		if (dup2(fd[i][1], 1) == -1)
+			return (1);
+	}
+	else if (i < n)
 	{
 		close(fd[i - 1][1]);
 		close(fd[i][0]);
 		if (dup2(fd[i - 1][0], 0) == -1)
 			return (1);
-		if (dup2(fd[i][1], 1) == -1)
-			return (1);
-	}
-	else if (i == 0)
-	{
-		close(fd[i][0]);
 		if (dup2(fd[i][1], 1) == -1)
 			return (1);
 	}
@@ -37,7 +37,7 @@ static int dup_fd(int **fd, int i, int n)
 	return (0);
 }
 
-static int exec_cmd(char **argv, char **env)
+int exec_cmd(char **argv, char **env)//
 {
 	if (!find_exec(argv, env))
 		exit(error("Error: exec not found\n"));
@@ -46,7 +46,7 @@ static int exec_cmd(char **argv, char **env)
 	return (1);
 }
 
-static void waiting(t_commands *commands)
+void waiting(t_commands *commands)//
 {
 	int	i;
 	int	status;
@@ -54,10 +54,12 @@ static void waiting(t_commands *commands)
 
 	i = commands->numders_cmd;
 	while (--i)
+	{
 		waitpid((commands->pid)[i], &status, WUNTRACED | WCONTINUED);
-	error_code = WEXITSTATUS(status);
-	if (error_code)
-		exit(error_code);
+		error_code = WEXITSTATUS(status);
+		if (error_code)
+			exit(error_code);
+	}
 }
 
 int	start_commands(t_commands *commands, char **env)

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 00:48:09 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/03 20:28:07 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 00:41:17 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "stdio.h"//
 # include "unistd.h"
 # include "fcntl.h"
+# include <sys/wait.h>
 
 typedef struct s_cmd
 {
