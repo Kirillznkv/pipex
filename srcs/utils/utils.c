@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 00:54:37 by kshanti           #+#    #+#             */
-/*   Updated: 2021/08/02 11:22:23 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/03 14:22:28 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,45 +18,20 @@ int error(char *str)
     return (1);
 }
 
-int struct_free(t_commands *commands, char *s1, char *s2)//////mb delete it
-{
-	int		i;
-	char	**a;
-
-	if (s1)
-		free(s1);
-	if (s2)
-		free(s2);
-	if (commands)
-	{
-		a = commands->cmd1;
-		i = -1;
-		while (a[++i])
-			free(a[i]);
-		if (commands->cmd1)
-			free(commands->cmd1);
-		a = commands->cmd2;
-		i = -1;
-		while (a[++i])
-			free(a[i]);
-		if (commands->cmd2)
-			free(commands->cmd2);
-	}
-	return (1);
-}
-
 void	skip_spases(char *str, int *i)
 {
 	while (str && str[*i] == ' ')
 		(*i)++;
 }
 
-void	free_mas(char **argv)
+int	free_mas(char **argv)
 {
 	int	i;
 
 	i = -1;
-	while (argv[++i])
+	while (argv && argv[++i])
 		free(argv[i]);
-	free(argv);
+	if (argv)
+		free(argv);
+	return (1);
 }

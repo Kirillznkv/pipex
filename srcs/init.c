@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:08:34 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/03 00:54:14 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/03 14:18:52 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static  int get_number_simbols(char *arg)
     return (i);
 }
 
-char    **get_command(char *arg)
+static char    **get_command(char *arg)
 {
     char    **res;
     int     inx;

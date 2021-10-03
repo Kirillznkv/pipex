@@ -6,12 +6,15 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:02:29 by kshanti           #+#    #+#             */
-/*   Updated: 2021/08/02 11:47:19 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/03 14:24:08 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
 
+
+
+//почистить Если будет нужно
 int	ft_strlen(char *str)
 {
 	int res;
