@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 00:48:09 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/03 14:45:05 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/03 20:28:07 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,10 @@ char	    *ft_substr(char *s, unsigned int start, size_t len);
 /*------------------------Init------------------------------------------------*/
 int			set_commands(t_commands *commands, char **argv, int argc);
 /*------------------------Commands--------------------------------------------*/
-void	    output(char **a);//
 int			start_commands(t_commands *commands, char **env);
 /*------------------------Split-----------------------------------------------*/
 char		**ft_split(char const *s, char c);
 /*------------------------Find_exec-------------------------------------------*/
-// char	    *find_exec(char **str, char **env);
+char	    *find_exec(char **str, char **env);
 
 #endif
