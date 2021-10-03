@@ -11,7 +11,7 @@ static int fill_fd_pipe(t_commands *commands)
 	return (0);
 }
 
-int dup_fd(int **fd, int i, int n)//
+static int dup_fd(int **fd, int i, int n)
 {
 	if (i == 0)
 	{
@@ -37,7 +37,7 @@ int dup_fd(int **fd, int i, int n)//
 	return (0);
 }
 
-int exec_cmd(char **argv, char **env)//
+static int exec_cmd(char **argv, char **env)
 {
 	if (!find_exec(argv, env))
 		exit(error("Error: exec not found\n"));
@@ -46,7 +46,7 @@ int exec_cmd(char **argv, char **env)//
 	return (1);
 }
 
-void waiting(t_commands *commands)//
+static void waiting(t_commands *commands)
 {
 	int	i;
 	int	status;
@@ -56,6 +56,8 @@ void waiting(t_commands *commands)//
 	while (--i)
 	{
 		waitpid((commands->pid)[i], &status, WUNTRACED | WCONTINUED);
+		if (i > 0)
+			close((commands->fd)[i - 1][0]);
 		error_code = WEXITSTATUS(status);
 		if (error_code)
 			exit(error_code);
