@@ -33,6 +33,15 @@ static int dup_fd(int **fd, int i, int n)
 	return (0);
 }
 
+static int exec_cmd(char **argv, char **env)
+{
+	if (!find_exec(argv, env))
+		return (error("Error: exec not found\n"));
+	execve(argv[0], argv, env);
+	exit(error("Error: exec error\n"));
+	return (1);
+}
+
 int	start_commands(t_commands *commands, char **env)
 {
 	int	i;
@@ -52,8 +61,8 @@ int	start_commands(t_commands *commands, char **env)
 		{
 			if (dup_fd(commands->fd, i, commands->numders_cmd - 1))//
 				return (error("Error: dup"));
-			if (exec_cmd())//
-				return (error("error: exec"));
+			if (exec_cmd((commands->cmd)[i].argv, env))//
+				return (1);
 		}
 	}
 	return (0);

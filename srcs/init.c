@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:08:34 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/03 20:04:19 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/03 20:54:20 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ int set_commands(t_commands *commands, char **argv, int argc)
 		if (((commands->cmd)[i]).argv == NULL)
 			return (error("Error: malloc\n"));
 	if (commands->fd_in == -1 || commands->fd_out == -1)
-		return ("Error: fd in/out\n");
+		return (error("Error: fd in/out\n"));
     return (0);
 }

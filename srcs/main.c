@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 00:51:28 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/03 20:02:36 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/03 20:53:59 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int m_struct(t_commands *commands, int argc)
 		(commands->fd)[i] = (int*)malloc(2 * sizeof(int));
 		if ((commands->fd)[i] == NULL)
 			return (1);
-		(commands->fd)[0] = -1;
-		(commands->fd)[1] = -1;
+		(commands->fd)[i][0] = -1;
+		(commands->fd)[i][1] = -1;
 	}
 	return (0);
 }
