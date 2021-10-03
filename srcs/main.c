@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 00:51:28 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/03 21:26:59 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 00:13:24 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int main(int argc, char **argv, char **env)
     if (m_struct(&commands, argc) || set_commands(&commands, &(argv[1]), argc))
         return (free_struct(&commands));
     if (start_commands(&commands, env))
-        return (free_struct(&commands));//add close fd
+        return (1);//free_struct(&commands));//add close fd
     return (0);
 }

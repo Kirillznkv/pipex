@@ -40,7 +40,7 @@ static int dup_fd(int **fd, int i, int n)
 static int exec_cmd(char **argv, char **env)
 {
 	if (!find_exec(argv, env))
-		return (error("Error: exec not found\n"));
+		exit(error("Error: exec not found\n"));
 	execve(argv[0], argv, env);
 	exit(error("Error: exec error\n"));
 	return (1);
@@ -52,8 +52,8 @@ static void waiting(t_commands *commands)
 	int	status;
 	int	error_code;
 
-	i = -1;
-	while (++i < commands->numders_cmd)
+	i = commands->numders_cmd;
+	while (--i)
 		waitpid((commands->pid)[i], &status, WUNTRACED | WCONTINUED);
 	error_code = WEXITSTATUS(status);
 	if (error_code)
@@ -73,14 +73,14 @@ int	start_commands(t_commands *commands, char **env)
 		(commands->pid)[i] = fork();
 		if ((commands->pid)[i] != 0)
 		{
-			close((commands->fd)[i][1]);
-			// (commands->fd)[i][1] = -1;
+			if (i < commands->numders_cmd - 1)
+				close((commands->fd)[i][1]);
 		}
 		else
 		{
-			if (dup_fd(commands->fd, i, commands->numders_cmd - 1))//
+			if (dup_fd(commands->fd, i, commands->numders_cmd - 1))
 				return (error("Error: dup"));
-			if (exec_cmd((commands->cmd)[i].argv, env))//
+			if (exec_cmd((commands->cmd)[i].argv, env))
 				return (1);
 		}
 	}
