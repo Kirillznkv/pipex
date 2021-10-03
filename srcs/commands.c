@@ -42,6 +42,20 @@ static int exec_cmd(char **argv, char **env)
 	return (1);
 }
 
+static void waiting(t_commands *commands)
+{
+	int	i;
+	int	status;
+	int	error_code;
+
+	i = -1;
+	while (++i < commands->numders_cmd)
+		waitpid((commands->pid)[i], &status, WUNTRACED | WCONTINUED);
+	error_code = WEXITSTATUS(status);
+	if (error_code)
+		exit(error_code);
+}
+
 int	start_commands(t_commands *commands, char **env)
 {
 	int	i;
@@ -65,5 +79,6 @@ int	start_commands(t_commands *commands, char **env)
 				return (1);
 		}
 	}
+	waiting(commands);
 	return (0);
 }
