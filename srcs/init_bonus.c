@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:08:34 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/04 19:03:52 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:15:24 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
 static  int get_number_arg(char *arg)
 {
@@ -63,6 +63,36 @@ static char    **get_command(char *arg)
     return (res);
 }
 
+static char	*getInFile(char **argv, int *i, int *n)
+{
+	int	fd;
+	int	size_name;
+	char *line;
+
+	if (!isEquals(argv[*i], "here_doc"))
+		return (ft_strdup(argv[*i]));
+	++(*i);
+	--(*n);
+	fd = open("./.shell_file", O_RDWR | O_CREAT | O_TRUNC, 0777);
+	size_name = ft_strlen(argv[*i]);
+	while (get_next_line(0, &line) == 1)
+	{
+		if (ft_strlen(line) != size_name || ft_strncmp(line, argv[*i], size_name))
+		{
+			write(fd, line, ft_strlen(line));
+			write(fd, "\n", 1);
+			free(line);
+		}
+		else
+		{
+			free(line);
+			break ;
+		}
+	}
+	close(fd);
+	return (ft_strdup("./.shell_file"));
+}
+
 int set_commands(t_commands *commands, char **argv)
 {
 	int		i;
@@ -71,7 +101,7 @@ int set_commands(t_commands *commands, char **argv)
     char    *outfile;
 
 	i = 1;
-    infile = ft_strdup(argv[i]);
+    infile = getInFile(argv, &i, &(commands->numders_cmd));
 	j = -1;
 	while (++j < commands->numders_cmd)
 		((commands->cmd)[j]).argv = get_command(argv[++i]);

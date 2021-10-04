@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 00:48:09 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/04 19:15:07 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 19:14:57 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "unistd.h"
 # include "fcntl.h"
 # include <sys/wait.h>
+
+int	get_next_line(int fd, char **line);
 
 typedef struct s_cmd
 {
