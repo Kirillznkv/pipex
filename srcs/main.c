@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 00:51:28 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/04 01:36:01 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 17:32:29 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static int m_struct(t_commands *commands, int argc)
 		(commands->fd)[i] = (int*)malloc(2 * sizeof(int));
 		if ((commands->fd)[i] == NULL)
 			return (1);
-		// (commands->fd)[i][0] = -1;
-		// (commands->fd)[i][1] = -1;
 	}
 	return (0);
 }
@@ -42,9 +40,9 @@ int main(int argc, char **argv, char **env)
 
     if (argc < 5)
         return (error("Error: argument\n"));
-    if (m_struct(&commands, argc) || set_commands(&commands, &(argv[1]), argc))
+    if (m_struct(&commands, argc) || set_commands(&commands, argv, argc))
         return (free_struct(&commands));
     if (start_commands(&commands, env))
-        return (1);//free_struct(&commands));//add close fd
+        return (free_struct(&commands));
     return (0);
 }

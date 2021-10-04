@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:08:34 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/04 01:57:50 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 17:31:54 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ int set_commands(t_commands *commands, char **argv, int argc)
     char    *infile;
     char    *outfile;
 
-    infile = ft_strdup(argv[0]);
+    infile = ft_strdup(argv[1]);
 	i = -1;
-	while (++i < argc - 2)
-		((commands->cmd)[i]).argv = get_command(argv[i + 1]);
+	while (++i < argc - 3)
+		((commands->cmd)[i]).argv = get_command(argv[i + 2]);
     outfile = ft_strdup(argv[i]);
 	commands->fd_in = open(infile, O_RDONLY, 0644);
 	commands->fd_out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);

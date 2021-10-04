@@ -70,7 +70,8 @@ int	start_commands(t_commands *commands, char **env)
 
 	if (fill_fd_pipe(commands))
 		return (error("Error: pipe\n"));
-	// fcntl((commands->fd)[0][0], F_SETFL, O_NONBLOCK);
+	dup2(commands->fd_in, 0);
+	dup2(commands->fd_out, 1);
 	i = -1;
 	while (++i < commands->numders_cmd)
 	{
