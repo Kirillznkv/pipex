@@ -6,16 +6,16 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 00:54:37 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/03 14:46:10 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 20:07:03 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
 
-int error(char *str)
+int	error(char *str)
 {
-    write(2, str, ft_strlen(str));
-    return (1);
+	write(2, str, ft_strlen(str));
+	return (1);
 }
 
 void	skip_spases(char *str, int *i)
@@ -26,7 +26,7 @@ void	skip_spases(char *str, int *i)
 
 int	free_struct(t_commands *commands)
 {
-	int i;
+	int	i;
 
 	if (commands->fd_in != -1)
 		close(commands->fd_in);
@@ -47,7 +47,7 @@ int	free_struct(t_commands *commands)
 
 int	free_masInt(int **arr, int n)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (arr && ++i < n)

@@ -6,13 +6,11 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 11:02:50 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/03 14:23:40 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 20:05:02 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
-
-//Почистить если будет нужно
 
 static size_t	size_split(const char *s, char c)
 {
@@ -61,8 +59,8 @@ char	**ft_split(char const *s, char c)
 	char	**map;
 
 	size_map = size_split(s, c);
-	if (s == NULL ||
-	(map = (char**)malloc((size_map + 1) * sizeof(char*))) == NULL)
+	map = (char **)malloc((size_map + 1) * sizeof(char *));
+	if (s == NULL || map == NULL)
 		return (NULL);
 	map[size_map] = NULL;
 	i = 0;
@@ -71,7 +69,8 @@ char	**ft_split(char const *s, char c)
 		while (*s == c)
 			s++;
 		size_line = str_len_n(s, c);
-		if ((map[i] = (char*)calloc((size_line + 1), sizeof(char))) == NULL)
+		map[i] = (char *)calloc((size_line + 1), sizeof(char));
+		if (map[i] == NULL)
 			return (del_split(map, i));
 		ft_strlcpy(map[i++], s, size_line + 1);
 		while (*s && *s != c)

@@ -6,64 +6,20 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:02:29 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/04 18:50:17 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 20:08:24 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
 
-
-
-//почистить Если будет нужно
-int	ft_strlen(char *str)
-{
-	int res;
-
-	res = 0;
-	while (str && str[res])
-		res++;
-	return (res);
-}
-
-char	*ft_strdup(char *s)
-{
-	char	*str;
-	int		i;
-
-	i = -1;
-	str = (char *)malloc(ft_strlen(s) + 1);
-    if (str)
-        str[ft_strlen(s)] = '\0';
-	while (str && s[++i])
-		str[i] = s[i];
-	return (str);
-}
-
-int	ft_strlcat(char *dst, char *src, int size)
-{
-	int	len;
-	int	i;
-	int	j;
-
-	i = ft_strlen(dst);
-	j = 0;
-	len = i + ft_strlen(src);
-	if (size <= i)
-		return (ft_strlen(src) + size);
-	while (i < (size - 1) && src[j])
-		dst[i++] = src[j++];
-	dst[i] = '\0';
-	return (len);
-}
-
-char    *ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
 	str = (char *)calloc(1, ft_strlen(s1) + ft_strlen(s2) + 1);
-    str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
 	if (str)
 	{
 		ft_strlcat(str, s1, ft_strlen(s1) + 1);
@@ -72,7 +28,7 @@ char    *ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-size_t		ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
 
@@ -80,14 +36,14 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t size)
 	if (dst == NULL || src == NULL)
 		return (0);
 	if (size == 0)
-		return (ft_strlen((char*)src));
+		return (ft_strlen((char *)src));
 	while (i < (size - 1) && src[i])
 	{
 		dst[i] = src[i];
 		i++;
 	}
 	dst[i] = '\0';
-	return (ft_strlen((char*)src));
+	return (ft_strlen((char *)src));
 }
 
 int	ft_strncmp(const char *str1, const char *str2, size_t num)
@@ -131,7 +87,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 
 int	isEquals(char *str1, char *str2)
 {
-	int i;
+	int	i;
 
 	if (!str1 || !str2 || ft_strlen(str1) != ft_strlen(str2))
 		return (0);
