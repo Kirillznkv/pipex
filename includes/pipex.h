@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 00:48:09 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/04 00:41:17 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 18:54:41 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "unistd.h"
 # include "fcntl.h"
 # include <sys/wait.h>
+
+int	get_next_line(int fd, char **line);
 
 typedef struct s_cmd
 {
@@ -46,8 +48,9 @@ char		*ft_strjoin(char *s1, char *s2);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 int			ft_strncmp(const char *str1, const char *str2, size_t num);
 char	    *ft_substr(char *s, unsigned int start, size_t len);
+int			isEquals(char *str1, char *str2);
 /*------------------------Init------------------------------------------------*/
-int			set_commands(t_commands *commands, char **argv, int argc);
+int			set_commands(t_commands *commands, char **argv);
 /*------------------------Commands--------------------------------------------*/
 int			start_commands(t_commands *commands, char **env);
 /*------------------------Split-----------------------------------------------*/

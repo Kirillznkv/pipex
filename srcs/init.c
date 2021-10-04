@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:08:34 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/04 17:31:54 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 18:54:44 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,49 @@ static char    **get_command(char *arg)
     return (res);
 }
 
-int set_commands(t_commands *commands, char **argv, int argc)
+static char	*getInFile(char **argv, int *i, int *n)
+{
+	int	fd;
+	int	size_name;
+	char *line;
+
+	if (!isEquals(argv[*i], "here_doc"))
+		return (ft_strdup(argv[*i]));
+	++(*i);
+	--(*n);
+	fd = open("./.shell_file", O_RDWR | O_CREAT | O_TRUNC, 0777);
+	size_name = ft_strlen(argv[*i]);
+	while (get_next_line(0, &line) == 1)
+	{
+		if (ft_strlen(line) != size_name || ft_strncmp(line, argv[*i], size_name))
+		{
+			write(fd, line, ft_strlen(line));
+			write(fd, "\n", 1);
+			free(line);
+		}
+		else
+		{
+			free(line);
+			break ;
+		}
+	}
+	close(fd);
+	return (ft_strdup("./.shell_file"));
+}
+
+int set_commands(t_commands *commands, char **argv)
 {
 	int		i;
+	int		j;
     char    *infile;
     char    *outfile;
 
-    infile = ft_strdup(argv[1]);
-	i = -1;
-	while (++i < argc - 3)
-		((commands->cmd)[i]).argv = get_command(argv[i + 2]);
-    outfile = ft_strdup(argv[i]);
+	i = 1;
+    infile = getInFile(argv, &i, &(commands->numders_cmd));//ft_strdup(argv[1]);
+	j = -1;
+	while (++j < commands->numders_cmd)
+		((commands->cmd)[j]).argv = get_command(argv[++i]);
+    outfile = ft_strdup(argv[++i]);
 	commands->fd_in = open(infile, O_RDONLY, 0644);
 	commands->fd_out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (infile)

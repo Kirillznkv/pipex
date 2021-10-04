@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:02:29 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/03 14:24:08 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 18:50:17 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,4 +127,18 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		while (s[start] && i < len)
 			str[i++] = s[start++];
 	return (str);
+}
+
+int	isEquals(char *str1, char *str2)
+{
+	int i;
+
+	if (!str1 || !str2 || ft_strlen(str1) != ft_strlen(str2))
+		return (0);
+	i = 0;
+	while (str1[i] && str1[i] == str2[i])
+		i++;
+	if (str1[i])
+		return (0);
+	return (1);
 }
