@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   commands.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/04 20:33:48 by kshanti           #+#    #+#             */
+/*   Updated: 2021/10/04 20:33:49 by kshanti          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pipex.h"
 
-static int fill_fd_pipe(t_commands *commands)
+static int	fill_fd_pipe(t_commands *commands)
 {
 	int	i;
 
@@ -11,7 +23,7 @@ static int fill_fd_pipe(t_commands *commands)
 	return (0);
 }
 
-static int dup_fd(int **fd, int i, int n)
+static int	dup_fd(int **fd, int i, int n)
 {
 	if (i == 0)
 	{
@@ -37,7 +49,7 @@ static int dup_fd(int **fd, int i, int n)
 	return (0);
 }
 
-static int exec_cmd(char **argv, char **env)
+static int	exec_cmd(char **argv, char **env)
 {
 	if (!find_exec(argv, env))
 		exit(error("Error: exec not found\n"));
@@ -46,7 +58,7 @@ static int exec_cmd(char **argv, char **env)
 	return (1);
 }
 
-static void waiting(t_commands *commands)
+static void	waiting(t_commands *commands)
 {
 	int	i;
 	int	status;

@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 11:21:31 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/03 20:27:51 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 20:25:01 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*get_path(char **env)
 	return (&(path_line[5]));
 }
 
-static int		is_finish_path(char *command, char **res)
+static int	is_finish_path(char *command, char **res)
 {
 	if (!ft_strncmp("./", command, 2) \
 		|| !ft_strncmp("../", command, 3) \
@@ -67,7 +67,6 @@ char	*find_exec(char **str, char **env)
 {
 	int		i;
 	char	*res;
-	char	*path;
 	char	**path_matrix;
 	char	**save_to_free;
 
@@ -78,8 +77,7 @@ char	*find_exec(char **str, char **env)
 		*str = res;
 		return (res);
 	}
-	path = get_path(env);
-	path_matrix = ft_split(path, ':');
+	path_matrix = ft_split(get_path(env), ':');
 	save_to_free = path_matrix;
 	i = -1;
 	while (path_matrix[++i])
