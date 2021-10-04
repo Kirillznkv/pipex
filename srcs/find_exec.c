@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 11:21:31 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/04 20:25:01 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/04 20:52:14 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ char	*find_exec(char **str, char **env)
 	int		i;
 	char	*res;
 	char	**path_matrix;
-	char	**save_to_free;
 
 	res = NULL;
 	if (is_finish_path(*str, &res))
@@ -78,19 +77,17 @@ char	*find_exec(char **str, char **env)
 		return (res);
 	}
 	path_matrix = ft_split(get_path(env), ':');
-	save_to_free = path_matrix;
 	i = -1;
 	while (path_matrix[++i])
 	{
 		res = check_matrix_path(path_matrix[i], *str);
 		if (res)
 		{
-			free_mas(save_to_free);
 			free(*str);
 			*str = res;
-			return (res);
+			break ;
 		}
 	}
-	free_mas(save_to_free);
+	free_mas(path_matrix);
 	return (res);
 }
