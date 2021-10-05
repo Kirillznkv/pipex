@@ -6,7 +6,7 @@
 /*   By: kshanti <kshanti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 01:08:34 by kshanti           #+#    #+#             */
-/*   Updated: 2021/10/04 20:32:47 by kshanti          ###   ########.fr       */
+/*   Updated: 2021/10/05 09:45:52 by kshanti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	set_commands(t_commands *commands, char **argv)
 		free(infile);
 	if (outfile)
 		free(outfile);
-	while (--i > 0)
+	while (--j > 0)
 		if (((commands->cmd)[i]).argv == NULL)
 			return (error("Error: malloc\n"));
 	if (commands->fd_in == -1 || commands->fd_out == -1)
